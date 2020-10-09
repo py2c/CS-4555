@@ -2,44 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class player_movement : MonoBehaviour
 {
     Animator anim;
-    private string turnInputAxis = "Horizontal";
-    public float rotationRate = 180;
+    private const string turnInputAxis = "Horizontal";
+    [SerializeField]
+    private float rotationRate = 180.0f;
+    
+    private InputActionMap actionMapKnight;
+    
     void Start()
     {
         anim = GetComponent<Animator>();
+        var inputAsset = InputActionAsset.FromJson(System.IO.File.ReadAllText(@"Assets\MainInput.inputactions"));
+        actionMapKnight = inputAsset.FindActionMap("PlayerKnight", true);
+        actionMapKnight.Enable();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var movementAction = actionMapKnight.FindAction("Movement",true);
         
-        if (Input.GetKeyDown(KeyCode.W))
-        {
+        ApplyInput(movementAction.ReadValue<Vector2>());
+    }
+    
+    private void ApplyInput(Vector2 movementInput)
+    {
+        if (movementInput.y != 0) {
+            anim.ResetTrigger("Idle");
             anim.SetTrigger("Walk");
-        }
-        if (Input.GetKeyDown(KeyCode.S))
-        {
+        } else {
+            anim.ResetTrigger("Walk");
             anim.SetTrigger("Idle");
         }
-
-        float turnAxis = Input.GetAxis(turnInputAxis);
-        ApplyInput(turnAxis);
-    }
-
-    private void ApplyInput(float turnInput)
-    {
-
-        Turn(turnInput);
+        Turn(movementInput.x);
     }
 
     private void Turn (float input)
     {
-
         transform.Rotate(0, input * rotationRate * Time.deltaTime, 0);
-
     }
 }
