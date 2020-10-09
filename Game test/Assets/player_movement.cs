@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -7,26 +8,43 @@ using UnityEngine.InputSystem;
 public class player_movement : MonoBehaviour
 {
     Animator anim;
-    private const string turnInputAxis = "Horizontal";
+    public float speed = 0;
     [SerializeField]
     private float rotationRate = 180.0f;
+    private float movementX;
+    private float movementY;
     
     private InputActionMap actionMapKnight;
-    
+    private Rigidbody rb;
+
     void Start()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
         var inputAsset = InputActionAsset.FromJson(System.IO.File.ReadAllText(@"Assets\MainInput.inputactions"));
         actionMapKnight = inputAsset.FindActionMap("PlayerKnight", true);
         actionMapKnight.Enable();
     }
 
+    
+
+    private void OnMove(InputValue movementValue)
+    {
+        Vector2 movementVector = movementValue.Get<Vector2>();
+
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+
+    }
+
     // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
         var movementAction = actionMapKnight.FindAction("Movement",true);
-        
         ApplyInput(movementAction.ReadValue<Vector2>());
+
+        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        rb.AddForce(movement * speed);
     }
     
     private void ApplyInput(Vector2 movementInput)
@@ -38,6 +56,7 @@ public class player_movement : MonoBehaviour
             anim.ResetTrigger("Walk");
             anim.SetTrigger("Idle");
         }
+
         Turn(movementInput.x);
     }
 
@@ -45,4 +64,16 @@ public class player_movement : MonoBehaviour
     {
         transform.Rotate(0, input * rotationRate * Time.deltaTime, 0);
     }
+
+
+    // This is for the Blue cubes that act as pick up items .. coins,swords etc...
+    private void OnTriggerEnter(Collider other)
+    {      if(other.gameObject.CompareTag("PickUp"))
+        {
+            UnityEngine.Debug.Log("item picked up");
+            other.gameObject.SetActive(false);
+        }
+       
+    }
+
 }
