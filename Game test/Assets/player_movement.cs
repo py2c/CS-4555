@@ -21,8 +21,8 @@ public class player_movement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
-        var inputAsset = InputActionAsset.FromJson(System.IO.File.ReadAllText(@"Assets\MainInput.inputactions"));
-        actionMapKnight = inputAsset.FindActionMap("PlayerKnight", true);
+        var inputAsset = new MainInput();
+        actionMapKnight = inputAsset.PlayerKnight;
         actionMapKnight.Enable();
     }
 
