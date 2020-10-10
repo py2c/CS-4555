@@ -26,8 +26,6 @@ public class player_movement : MonoBehaviour
         actionMapKnight.Enable();
     }
 
-    
-
     private void OnMove(InputValue movementValue)
     {
         Vector2 movementVector = movementValue.Get<Vector2>();
@@ -37,7 +35,6 @@ public class player_movement : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
         var movementAction = actionMapKnight.FindAction("Movement",true);
@@ -68,7 +65,8 @@ public class player_movement : MonoBehaviour
 
     // This is for the Blue cubes that act as pick up items .. coins,swords etc...
     private void OnTriggerEnter(Collider other)
-    {      if(other.gameObject.CompareTag("PickUp"))
+    {
+        if (other.gameObject.CompareTag("PickUp"))
         {
             UnityEngine.Debug.Log("item picked up");
             other.gameObject.SetActive(false);
