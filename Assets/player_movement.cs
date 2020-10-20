@@ -26,22 +26,12 @@ public class player_movement : MonoBehaviour
         actionMapKnight.Enable();
     }
 
-    private void OnMove(InputValue movementValue)
-    {
-        Vector2 movementVector = movementValue.Get<Vector2>();
-
-        movementX = movementVector.x;
-        movementY = movementVector.y;
-
-    }
+ 
 
     private void FixedUpdate()
     {
         var movementAction = actionMapKnight.FindAction("Movement",true);
         ApplyInput(movementAction.ReadValue<Vector2>());
-
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
     }
     
     private void ApplyInput(Vector2 movementInput)
