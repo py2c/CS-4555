@@ -7,15 +7,14 @@ using UnityEngine.InputSystem;
 
 public class player_movement : MonoBehaviour
 {
-    Animator anim;
-    //public float speed = 0;
     [SerializeField]
-    private float rotationRate = 180.0f;
-    private float movementX;
-    private float movementY;
+    private float speed;
+    [SerializeField]
+    private float rotationRate;
     
     private InputActionMap actionMapKnight;
     private Rigidbody rb;
+    private Animator anim;
 
     void Start()
     {
@@ -34,14 +33,22 @@ public class player_movement : MonoBehaviour
     
     private void ApplyInput(Vector2 movementInput)
     {
-        if (movementInput.y > 0) {
+        if (movementInput.y > 0.5) {
             anim.ResetTrigger("Idle");
+            anim.ResetTrigger("Walk");
+            anim.SetTrigger("Run");
+        } else if (movementInput.y > 0) {
+            anim.ResetTrigger("Idle");
+            anim.ResetTrigger("Run");
             anim.SetTrigger("Walk");
         } else {
             anim.ResetTrigger("Walk");
+            anim.ResetTrigger("Run");
             anim.SetTrigger("Idle");
         }
-
+        
+        rb.AddRelativeForce(0, 0, movementInput.y * speed * Time.deltaTime, ForceMode.Impulse);
+        
         Turn(movementInput.x);
     }
 
