@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class player_movement : MonoBehaviour
 {
     Animator anim;
-    public float speed = 0;
+    //public float speed = 0;
     [SerializeField]
     private float rotationRate = 180.0f;
     private float movementX;
@@ -26,8 +26,6 @@ public class player_movement : MonoBehaviour
         actionMapKnight.Enable();
     }
 
- 
-
     private void FixedUpdate()
     {
         var movementAction = actionMapKnight.FindAction("Movement",true);
@@ -36,7 +34,7 @@ public class player_movement : MonoBehaviour
     
     private void ApplyInput(Vector2 movementInput)
     {
-        if (movementInput.y != 0) {
+        if (movementInput.y > 0) {
             anim.ResetTrigger("Idle");
             anim.SetTrigger("Walk");
         } else {
@@ -47,7 +45,7 @@ public class player_movement : MonoBehaviour
         Turn(movementInput.x);
     }
 
-    private void Turn (float input)
+    private void Turn(float input)
     {
         transform.Rotate(0, input * rotationRate * Time.deltaTime, 0);
     }
