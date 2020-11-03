@@ -8,7 +8,8 @@ public class KnightStats : MonoBehaviour
     private static int current_hp = 500;
     [SerializeField]
     private static int max_hp = 500;
-    
+
+ 
     void Start()
     {
         HealthBarHandler.SetHealthBarValue(1);
@@ -17,7 +18,6 @@ public class KnightStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //dealDamage(1);
     }
     
     public static void dealDamage(int x)
@@ -28,5 +28,7 @@ public class KnightStats : MonoBehaviour
             //Game over
         }
     }
+   
     
 }
+

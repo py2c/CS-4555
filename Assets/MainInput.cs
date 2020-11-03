@@ -20,7 +20,7 @@ public class @MainInput : IInputActionCollection, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""266b3aee-19c6-4116-8ef3-edfa90455cb7"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -28,11 +28,19 @@ public class @MainInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""CameraMovement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""48e4ad69-51d9-4b53-8d44-820c631e1769"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""e986fa5c-aa4d-4feb-acfe-d9fcf257fc38"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press""
                 }
             ],
             ""bindings"": [
@@ -167,6 +175,17 @@ public class @MainInput : IInputActionCollection, IDisposable
                     ""action"": ""CameraMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a5839e7d-921b-420a-ae86-3586d7c1253f"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +196,7 @@ public class @MainInput : IInputActionCollection, IDisposable
         m_PlayerKnight = asset.FindActionMap("PlayerKnight", throwIfNotFound: true);
         m_PlayerKnight_Movement = m_PlayerKnight.FindAction("Movement", throwIfNotFound: true);
         m_PlayerKnight_CameraMovement = m_PlayerKnight.FindAction("CameraMovement", throwIfNotFound: true);
+        m_PlayerKnight_Jump = m_PlayerKnight.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -228,12 +248,14 @@ public class @MainInput : IInputActionCollection, IDisposable
     private IPlayerKnightActions m_PlayerKnightActionsCallbackInterface;
     private readonly InputAction m_PlayerKnight_Movement;
     private readonly InputAction m_PlayerKnight_CameraMovement;
+    private readonly InputAction m_PlayerKnight_Jump;
     public struct PlayerKnightActions
     {
         private @MainInput m_Wrapper;
         public PlayerKnightActions(@MainInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerKnight_Movement;
         public InputAction @CameraMovement => m_Wrapper.m_PlayerKnight_CameraMovement;
+        public InputAction @Jump => m_Wrapper.m_PlayerKnight_Jump;
         public InputActionMap Get() { return m_Wrapper.m_PlayerKnight; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -249,6 +271,9 @@ public class @MainInput : IInputActionCollection, IDisposable
                 @CameraMovement.started -= m_Wrapper.m_PlayerKnightActionsCallbackInterface.OnCameraMovement;
                 @CameraMovement.performed -= m_Wrapper.m_PlayerKnightActionsCallbackInterface.OnCameraMovement;
                 @CameraMovement.canceled -= m_Wrapper.m_PlayerKnightActionsCallbackInterface.OnCameraMovement;
+                @Jump.started -= m_Wrapper.m_PlayerKnightActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerKnightActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerKnightActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerKnightActionsCallbackInterface = instance;
             if (instance != null)
@@ -259,6 +284,9 @@ public class @MainInput : IInputActionCollection, IDisposable
                 @CameraMovement.started += instance.OnCameraMovement;
                 @CameraMovement.performed += instance.OnCameraMovement;
                 @CameraMovement.canceled += instance.OnCameraMovement;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -267,5 +295,6 @@ public class @MainInput : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnCameraMovement(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }
