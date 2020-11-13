@@ -7,7 +7,7 @@
             "actions": [
                 {
                     "name": "Movement",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "266b3aee-19c6-4116-8ef3-edfa90455cb7",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -15,11 +15,19 @@
                 },
                 {
                     "name": "CameraMovement",
-                    "type": "Value",
+                    "type": "PassThrough",
                     "id": "48e4ad69-51d9-4b53-8d44-820c631e1769",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "e986fa5c-aa4d-4feb-acfe-d9fcf257fc38",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press"
                 }
             ],
             "bindings": [
@@ -152,6 +160,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CameraMovement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a5839e7d-921b-420a-ae86-3586d7c1253f",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
