@@ -15,11 +15,13 @@ public class NPC : MonoBehaviour
     [TextArea(5, 10)]
     public Queue<string> sentences;
 
+    private GoblinDialogue goblindialogue;
+
     void Start()
     {
         dialogueSystem = FindObjectOfType<DialogueSystem>();
-        
-        GoblinDialogue goblindialogue = new GoblinDialogue();
+
+        goblindialogue = new GoblinDialogue();
         goblindialogue.LoadSentences();
         sentences = goblindialogue.GetSentences();
     }
@@ -48,7 +50,5 @@ public class NPC : MonoBehaviour
     {
         FindObjectOfType<DialogueSystem>().OutOfRange();
         this.gameObject.GetComponent<NPC>().enabled = false;
-
-        //sentences.Clear();
     }
 }

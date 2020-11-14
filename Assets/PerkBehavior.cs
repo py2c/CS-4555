@@ -67,5 +67,7 @@ public class PerkBehavior : MonoBehaviour
         private void PlusPerFunction()
         {
             Debug.Log("Adding Persuassion points!");
+            int pers = KnightStats.GetPersuasion();
+            KnightStats.setPersuasion(pers + 1);
         }
     }

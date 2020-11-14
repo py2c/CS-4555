@@ -9,7 +9,17 @@ public class KnightStats : MonoBehaviour
     [SerializeField]
     private static int max_hp = 500;
 
- 
+    private static int persuasion = 30;
+
+
+    public static void setPersuasion(int value){
+        persuasion = value;
+    }
+
+    public static int GetPersuasion(){
+        return persuasion;
+    }
+
     void Start()
     {
         HealthBarHandler.SetHealthBarValue(1);
