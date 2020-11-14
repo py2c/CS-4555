@@ -18,7 +18,10 @@ public class NPC : MonoBehaviour
     void Start()
     {
         dialogueSystem = FindObjectOfType<DialogueSystem>();
-
+        
+        GoblinDialogue goblindialogue = new GoblinDialogue();
+        goblindialogue.LoadSentences();
+        sentences = goblindialogue.GetSentences();
     }
 
     void Update()
