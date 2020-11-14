@@ -5,9 +5,9 @@ using UnityEngine;
 public class KnightStats : MonoBehaviour
 {
     [SerializeField]
-    private static int current_hp = 500;
+    private static int current_hp = 100;
     [SerializeField]
-    private static int max_hp = 500;
+    private static int max_hp = 100;
 
     private static int persuasion = 30;
 
@@ -18,6 +18,11 @@ public class KnightStats : MonoBehaviour
 
     public static int GetPersuasion(){
         return persuasion;
+    }
+
+
+    public static int GetCurrentHP(){
+        return current_hp;
     }
 
     void Start()
@@ -36,9 +41,8 @@ public class KnightStats : MonoBehaviour
         HealthBarHandler.SetHealthBarValue(((float)current_hp)/max_hp);
         if (current_hp < 0) {
             //Game over
+            Application.Quit();
         }
     }
-   
-    
 }
 
