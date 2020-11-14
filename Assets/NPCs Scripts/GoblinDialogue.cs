@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class GoblinDialogue
 {
-    private List<string> sentences = new List<string>();
+    private Queue<string> sentences = new Queue<string>();
 
     public void LoadSentences(){
-        sentences.Add("Hello Stranger, my name is Bjorn");
-        sentences.Add("What brings you here?");
-        sentences.Add("Goodbye, Mr. Knight");
+        sentences.Enqueue("Hello Stranger, my name is Bjorn");
+        sentences.Enqueue("What brings you here?");
+        sentences.Enqueue("Goodbye, Mr. Knight");
     }
 
-    public string[] GetSentences(){
-        return sentences.ToArray();
+    public Queue<string> GetSentences(){
+        return sentences;
     }
     
 

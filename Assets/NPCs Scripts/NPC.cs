@@ -13,7 +13,7 @@ public class NPC : MonoBehaviour
     public string Name;
 
     [TextArea(5, 10)]
-    public string[] sentences;
+    public Queue<string> sentences;
 
     void Start()
     {
@@ -48,5 +48,7 @@ public class NPC : MonoBehaviour
     {
         FindObjectOfType<DialogueSystem>().OutOfRange();
         this.gameObject.GetComponent<NPC>().enabled = false;
+
+        //sentences.Clear();
     }
 }

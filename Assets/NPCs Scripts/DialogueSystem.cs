@@ -18,7 +18,7 @@ public class DialogueSystem : MonoBehaviour
 
     public string Names;
 
-    public string[] dialogueLines;
+    public Queue<string> dialogueLines;
 
     public bool letterIsMultiplied = false;
     public bool dialogueActive = false;
@@ -72,7 +72,7 @@ public class DialogueSystem : MonoBehaviour
     {
         if (outOfRange == false)
         {
-            int dialogueLength = dialogueLines.Length;
+            int dialogueLength = dialogueLines.Count;
             int currentDialogueIndex = 0;
 
             while (currentDialogueIndex < dialogueLength || !letterIsMultiplied)
@@ -80,7 +80,9 @@ public class DialogueSystem : MonoBehaviour
                 if (!letterIsMultiplied)
                 {
                     letterIsMultiplied = true;
-                    StartCoroutine(DisplayString(dialogueLines[currentDialogueIndex++]));
+                    StartCoroutine(DisplayString(dialogueLines.Dequeue()));
+                    
+                    currentDialogueIndex++;
 
                     if (currentDialogueIndex >= dialogueLength)
                     {
