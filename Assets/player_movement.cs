@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class player_movement : MonoBehaviour
 {
@@ -12,10 +13,12 @@ public class player_movement : MonoBehaviour
     private float speed;
     [SerializeField]
     private float rotationRate;
+    public TextMeshProUGUI countText;
 
     private InputActionMap actionMapKnight;
     private Rigidbody rb;
     private Animator anim;
+    private int count;
 
 
     void Start()
@@ -25,6 +28,10 @@ public class player_movement : MonoBehaviour
         var inputAsset = new MainInput();
         actionMapKnight = inputAsset.PlayerKnight;
         actionMapKnight.Enable();
+        count = 0;
+
+        SetCountText();
+
     }
 
     private void FixedUpdate()
@@ -64,4 +71,21 @@ public class player_movement : MonoBehaviour
         transform.Rotate(0, input * rotationRate * Time.deltaTime, 0);
     }
 
-}
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("PickUp"))
+        {
+            other.gameObject.SetActive(false);
+            // Add one to the score variable 'count'
+            count = count + 5;
+
+            // Run the 'SetCountText()' function (see below)
+            SetCountText();
+        }
+    }
+    void SetCountText()
+    {
+        countText.text = "Coins: " + count.ToString();
+
+    }
+    }

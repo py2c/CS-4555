@@ -29,7 +29,7 @@ public class NPC : MonoBehaviour
     void Update()
     {
         Vector3 Pos = Camera.main.WorldToScreenPoint(NPCCharacter.position);
-        Pos.y +=400;
+        Pos.y +=475;
         ChatBackGround.position = Pos;
     }
 
@@ -50,5 +50,10 @@ public class NPC : MonoBehaviour
     {
         FindObjectOfType<DialogueSystem>().OutOfRange();
         this.gameObject.GetComponent<NPC>().enabled = false;
+        dialogueSystem = FindObjectOfType<DialogueSystem>();
+
+        goblindialogue = new GoblinDialogue();
+        goblindialogue.LoadSentences();
+        sentences = goblindialogue.GetSentences();
     }
 }

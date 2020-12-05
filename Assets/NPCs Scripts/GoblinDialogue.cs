@@ -9,7 +9,7 @@ public class GoblinDialogue
     System.Random random = new System.Random();
 
     public void LoadSentences(){
-        sentences.Enqueue("Hello Stranger, my name is Bjorn");
+        sentences.Enqueue("You some kinda knight? What's your deal?");
         sentences.Enqueue("What brings you here?");
 
         int pers = random.Next(70) + 1;
