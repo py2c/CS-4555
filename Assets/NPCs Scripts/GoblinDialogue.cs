@@ -25,8 +25,8 @@ public class GoblinDialogue
 
         int pers = random.Next(70) + 1;
         pers += KnightStats.GetPersuasion() / 4;
-        pers += KnightStats.getBargaining() / 4;
-        pers += KnightStats.getLuck() / 5;
+        pers += KnightStats.GetBargaining() / 4;
+        pers += KnightStats.GetLuck() / 5;
 
         if(pers >= 60){
             sentences.Enqueue("Okay, I will join. Let's see how it works out");

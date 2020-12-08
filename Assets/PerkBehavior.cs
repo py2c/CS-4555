@@ -55,12 +55,16 @@ public class PerkBehavior : MonoBehaviour
         }
 
         private void PlusluckFunction()
-        {
+    {
+            int luk = KnightStats.GetLuck();
+            KnightStats.setLuck(luk + 5);
             Debug.Log("Adding Luck points!");
         }
 
         private void PlusBargFunction()
         {
+            int bargs = KnightStats.GetBargaining();
+            KnightStats.setBargaining(bargs + 5);
             Debug.Log("Adding Bargaining points!");
         }
 

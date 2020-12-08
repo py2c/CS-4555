@@ -27,14 +27,14 @@ public class KnightStats : MonoBehaviour
     public static void setBargaining(int barg){
         bargaining = barg;
     }
-    public static int getBargaining(){
+    public static int GetBargaining(){
         return bargaining;
     }
     
     public static void setLuck(int luk){
         luck = luk;
     }
-    public static int getLuck(){
+    public static int GetLuck(){
         return luck;
     }
     
