@@ -11,17 +11,18 @@ public class GoblinDialogue
     public void LoadSentences(){
         sentences.Enqueue("You some kinda knight? What's your deal?");
         sentences.Enqueue("What brings you here?");
+        sentences.Enqueue("HU! Join an Army?");
 
         int pers = random.Next(70) + 1;
         pers += KnightStats.GetPersuasion() / 4;
 
         if(pers >= 60){
-            sentences.Enqueue("You have passed the persuasion check.");
-            sentences.Enqueue("I will now join your side.");
+            sentences.Enqueue("Okay, I will join. Let's see how it works out");
+            sentences.Enqueue("Fine, I'll join your army");
         }
         else{
-            sentences.Enqueue("Sorry, your persuasion is too low so I can not join you.");
-            sentences.Enqueue("Good bye, Mr. Knight.");
+            sentences.Enqueue("Heaok... No way I'm joining some stinkin' knight.");
+            sentences.Enqueue("Be gone from my sight .");
         }
     }
 

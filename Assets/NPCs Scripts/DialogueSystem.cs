@@ -10,7 +10,8 @@ public class DialogueSystem : MonoBehaviour
 
     public GameObject dialogueGUI;
     public Transform dialogueBoxGUI;
-
+   
+   
     public float letterDelay = 0.1f;
     public float letterMultiplier = 0.5f;
 
@@ -24,7 +25,7 @@ public class DialogueSystem : MonoBehaviour
     public bool dialogueActive = false;
     public bool dialogueEnded = false;
     public bool outOfRange = true;
-
+    
 
     void Start()
     {
@@ -35,7 +36,12 @@ public class DialogueSystem : MonoBehaviour
         StopAllCoroutines();
         dialogueGUI.SetActive(false);
         dialogueBoxGUI.gameObject.SetActive(false);
+
+     
+
     }
+
+    
 
     void Update()
     {

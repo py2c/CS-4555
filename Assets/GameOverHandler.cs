@@ -1,28 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverHandler : MonoBehaviour
 {
-    public static Image gameOverImage;
+    public GameObject deathPanel;
+    private bool pauseGame = false;
+    
     // Start is called before the first frame update
     void Start()
     {
-        
+        deathPanel.SetActive(false);
     }
 
     // Update is called once per frame
-    void Update()
+    public void GameOver()
     {
-        if (KnightStats.GetCurrentHP() < 0) {
-            gameOverImage.canvasRenderer.SetAlpha(1.0f);
-        }
+      
+            deathPanel.SetActive(true);
+            //stop time.....
+            ToggleTime();
+       
     }
     
-    private void Awake()
+  
+    private void ToggleTime()
     {
-        gameOverImage = GetComponent<Image>();
+        pauseGame = !pauseGame;
+
+        if (pauseGame)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+    }
+    public void Retry()
+    {
+        ToggleTime();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
 

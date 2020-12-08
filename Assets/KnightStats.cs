@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class KnightStats : MonoBehaviour
 {
@@ -8,9 +9,8 @@ public class KnightStats : MonoBehaviour
     private static int current_hp = 100;
     [SerializeField]
     private static int max_hp = 100;
-
     private static int persuasion = 30;
-
+    private GameObject deathPanel;
 
     public static void setPersuasion(int value){
         persuasion = value;
@@ -39,9 +39,12 @@ public class KnightStats : MonoBehaviour
     {
         current_hp -= x;
         HealthBarHandler.SetHealthBarValue(((float)current_hp)/max_hp);
-        if (current_hp < 0) {
-            //Game over
-            Application.Quit();
+        if (current_hp < 0)
+        {
+            
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+
         }
     }
 }
