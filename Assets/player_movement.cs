@@ -21,6 +21,7 @@ public class player_movement : MonoBehaviour
     private int count;
 
 
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -86,6 +87,6 @@ public class player_movement : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Coins: " + count.ToString();
-
+        KnightStats.setCoin(count);
     }
     }

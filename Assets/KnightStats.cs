@@ -10,6 +10,10 @@ public class KnightStats : MonoBehaviour
     [SerializeField]
     private static int max_hp = 100;
     private static int persuasion = 30;
+    private static int bargaining = 10;
+    private static int luck = 10;
+
+    private static int coin = 0;
     private GameObject deathPanel;
 
     public static void setPersuasion(int value){
@@ -20,9 +24,31 @@ public class KnightStats : MonoBehaviour
         return persuasion;
     }
 
+    public static void setBargaining(int barg){
+        bargaining = barg;
+    }
+    public static int getBargaining(){
+        return bargaining;
+    }
+    
+    public static void setLuck(int luk){
+        luck = luk;
+    }
+    public static int getLuck(){
+        return luck;
+    }
+    
 
     public static int GetCurrentHP(){
         return current_hp;
+    }
+
+    public static int getCoin(){
+        return coin;
+    }
+
+    public static void setCoin(int newCoin){
+        coin = newCoin;
     }
 
     void Start()

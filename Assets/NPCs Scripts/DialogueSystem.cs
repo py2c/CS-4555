@@ -12,7 +12,7 @@ public class DialogueSystem : MonoBehaviour
     public Transform dialogueBoxGUI;
    
    
-    public float letterDelay = 0.1f;
+    public float letterDelay = 1.5f;
     public float letterMultiplier = 0.5f;
 
     public KeyCode DialogueInput = KeyCode.F;
